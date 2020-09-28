@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,12 +75,12 @@ namespace GameLogic
 			return 'C';
 		}
 
-		public int GetPoints(int depth)
+		public int GetPoints(char state, int depth)
 		{
-			if (CurrPlayer == PlayerSymbols["Bot"])
+			if (state == PlayerSymbols["Bot"])
 				return 10 - depth;
-			else if (CurrPlayer == PlayerSymbols["Human"])
-				return 10 + depth;
+			else if (state == PlayerSymbols["Human"])
+				return -10 + depth;
 			else
 				return 0;
 		}
@@ -125,9 +126,9 @@ namespace GameLogic
 		{
 			int score = Int32.MinValue;
 			string player = "Bot";
-
-			if (CheckGameState() != 'C')
-				return GetPoints(depth);
+			char state = CheckGameState();
+			if (state != 'C')
+				return GetPoints(state, depth);
 
 			if (!IsMaximizing)
 			{
@@ -166,8 +167,11 @@ namespace GameLogic
 				pos = GetEasyBotPlay();
 			else
 				pos = GetHardBotPlay();
-			UpdateBoard(buttonsDic[pos], pos);
-
+			if (CheckGameState() == 'C')
+			{
+				UpdateBoard(buttonsDic[pos], pos);
+				UpdatePlayer();
+			}
 		}
 
 		public MainWindow()
@@ -175,7 +179,7 @@ namespace GameLogic
 			InitializeComponent();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void ButtonClick(object sender, RoutedEventArgs e)
 		{
 			Button button = (Button)sender;
 			string pos = button.Name.ToString().Substring(1, 2);
@@ -187,9 +191,25 @@ namespace GameLogic
 				if (BotIsPlaying)
 				{
 					BotTurn();
-					UpdatePlayer();
 				}
 
+			}
+		}
+
+		private void RestartClick(object sender, RoutedEventArgs e)
+		{
+			board.Children.OfType<Button>().Cast<Button>().ToList().ForEach(Button => 
+			{ 
+				Button.IsEnabled = true;
+				Button.Content = " ";
+			});
+
+			for (int col = 0; col < 3; col++)
+			{
+				for (int row = 0; row < 3; row++)
+				{
+					Board[col, row] = ' ';
+				}
 			}
 		}
 	}

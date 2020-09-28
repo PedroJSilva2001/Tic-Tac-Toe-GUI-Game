@@ -9,6 +9,11 @@
         Background="GhostWhite"
         ResizeMode="CanMinimize">
     <Window.Resources>
+        <Style TargetType="Line">
+            <Setter Property="Stroke" Value="#FF0DA192"/>
+            <Setter Property="StrokeThickness" Value="7"/>
+            <Setter Property="Fill" Value="#FF0DA192"/>
+        </Style>
         <Style x:Key="MyButtonStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="0"/>
@@ -17,7 +22,6 @@
             <Setter Property="IsEnabled" Value="true"/>
             <Setter Property="Content" Value=" "/>
             <Setter Property="Background" Value="#FF14BDAC"/>
-            <EventSetter Event="Click" Handler="Button_Click"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -43,22 +47,37 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="130"/>
             <RowDefinition Height="235"/>
+            <RowDefinition Height="85"/>
 
         </Grid.RowDefinitions>
+                <Button Style = "{StaticResource MyButtonStyle}" 
+                Grid.Row="2"
+                Background="GhostWhite"
+                Width="200"
+                Height="30"
+                Content="Reiniciar Jogo" 
+                FontSize="17" 
+                Margin="308,8,292,47" 
+                FontWeight="SemiBold" 
+                FontStretch="Normal" 
+                FontStyle="Normal"
+                FontFamily="Segoe UI"
+                Foreground="#FF0DA192"
+                Click="RestartClick"/>
         <Canvas x:Name="board" Grid.Row="1"  Background="#FF14BDAC">
-            <Line X1="300" X2="505" Y1="83" Y2="83" Stroke="#FF0DA192" StrokeThickness="7" Fill="#FF0DA192"/>
-            <Line X1="300" X2="505" Y1="152" Y2="152" Stroke="#FF0DA192"  StrokeThickness="7" Fill="#FF0DA192"/>
-            <Line X1="367" X2="367" Y1="15" Y2="220" Stroke="#FF0DA192" StrokeThickness="7" Fill="#FF0DA192"/>
-            <Line X1="438" X2="438" Y1="15" Y2="220" Stroke="#FF0DA192" StrokeThickness="7" Fill="#FF0DA192"/>
-            <Button x:Name="B00" Canvas.Left="300" Canvas.Top="18" Style = "{StaticResource MyButtonStyle}"/>
-            <Button x:Name="B10" Canvas.Left="371" Canvas.Top="17"  Style = "{StaticResource MyButtonStyle}"/>
-            <Button x:Name="B20" Canvas.Left="442" Canvas.Top="16"  Style = "{StaticResource MyButtonStyle}"/>
-            <Button x:Name="B01" Canvas.Left="300" Canvas.Top="86"  Style = "{StaticResource MyButtonStyle}"/>
-            <Button x:Name="B11" Canvas.Left="370" Canvas.Top="87" Style = "{StaticResource MyButtonStyle}"/>
-            <Button x:Name="B21" Canvas.Left="442" Canvas.Top="86" Style = "{StaticResource MyButtonStyle}" />
-            <Button x:Name="B02" Canvas.Left="300" Canvas.Top="155" Style = "{StaticResource MyButtonStyle}" />
-            <Button x:Name="B12" Canvas.Left="371" Canvas.Top="155" Style = "{StaticResource MyButtonStyle}" />
-            <Button x:Name="B22" Canvas.Left="442" Canvas.Top="155" Style = "{StaticResource MyButtonStyle}"/>
+            <Line X1="300" X2="505" Y1="83" Y2="83" />
+            <Line X1="300" X2="505" Y1="152" Y2="152"/>
+            <Line X1="367" X2="367" Y1="15" Y2="220" />
+            <Line X1="438" X2="438" Y1="15" Y2="220"/>
+            <Button x:Name="B00" Canvas.Left="300" Canvas.Top="18" Style = "{StaticResource MyButtonStyle}" Click="ButtonClick"/>
+            <Button x:Name="B10" Canvas.Left="371" Canvas.Top="17" Style = "{StaticResource MyButtonStyle}"  Click="ButtonClick"/>
+            <Button x:Name="B20" Canvas.Left="442" Canvas.Top="16" Style = "{StaticResource MyButtonStyle}"  Click="ButtonClick"/>
+            <Button x:Name="B01" Canvas.Left="300" Canvas.Top="86" Style = "{StaticResource MyButtonStyle}"  Click="ButtonClick"/>
+            <Button x:Name="B11" Canvas.Left="371" Canvas.Top="87" Style = "{StaticResource MyButtonStyle}"  Click="ButtonClick"/>
+            <Button x:Name="B21" Canvas.Left="442" Canvas.Top="86" Style = "{StaticResource MyButtonStyle}"  Click="ButtonClick"/>
+            <Button x:Name="B02" Canvas.Left="300" Canvas.Top="155" Style = "{StaticResource MyButtonStyle}"   Click="ButtonClick"/>
+            <Button x:Name="B12" Canvas.Left="371" Canvas.Top="155" Style = "{StaticResource MyButtonStyle}" Click="ButtonClick" />
+            <Button x:Name="B22" Canvas.Left="442" Canvas.Top="155" Style = "{StaticResource MyButtonStyle}"  Click="ButtonClick"/>
         </Canvas>
     </Grid>
 </Window>
