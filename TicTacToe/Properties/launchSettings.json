@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TicTacToe": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
